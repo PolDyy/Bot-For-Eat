@@ -1,0 +1,10 @@
+/main/.env
+/venv/
+
+*.pyc
+*.egg-info
+
+# Если вы программируете на Mac
+.DS_Store
+
+*.iml
