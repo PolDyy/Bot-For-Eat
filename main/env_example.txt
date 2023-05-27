@@ -1,2 +1,4 @@
 BOT_TOKEN = "токен telegram бота"
+PAYMENTS_TOKEN = 'токен для оплаты'
 SECRET_KEY = 'ключ для Flask-Приложения'
+FLASK_ENV = 'config.DevelopementConfig'

@@ -28,8 +28,9 @@ const addButton = document.querySelector(".add-button")
 const closePopupBtn = document.getElementById('close-popup');
 const sizeButtons = document.querySelectorAll('.popup-size');
 const popup = document.getElementById('popup');
+let bot = window.Telegram.WebApp;
 
-
+setBotStyle();
 clearPopup();
 
 closePopupBtn.addEventListener('click', () => {
@@ -122,8 +123,13 @@ addCheckBoxes.forEach(function(checkbox){
 
 addButton.addEventListener('click', (e) => {
     const productFrom = new FormData(document.getElementById('popup-form'));
-    addProduct(productFrom)
-});
+    addProduct(productFrom);
+    if (!window.bot.MainButton.isVisible) {
+        window.bot.MainButton.show();
+    }
+    popup.style.display = 'none';
+    clearPopup();
+})
 
 function addProduct(form, cb){
     fetch("/product/add",{
@@ -145,33 +151,9 @@ function addProduct(form, cb){
     })
 }
 
-
-
-// function addProduct(body, cb){
-//     const xhr = new XMLHttpRequest();
-//     xhr.open('POST', "/product/add");
-//     xhr.addEventListener('load', () => {
-//         const response = JSON.parse(xhr.responseText)
-//         cb(response);
-//     });
-//
-//     xhr.addEventListener('error', () =>{
-//         console.log("error");
-//
-//     });
-//     xhr.send(JSON.stringify(body));
-// }
-
-
-
-// removeCheckBoxes.forEach(function(checkbox){
-//     checkbox.addEventListener('click', function() {
-//         remove = this.closest('.removes-item').querySelector('.removes-name').textContent;
-//         if (this.checked) {
-//             window.product.addRemoveItem(remove);
-//         } else {
-//             window.product.removeRemoveItem(remove);
-//           }
-//     console.log(window.product.remove)
-//     });
-// });
+function setBotStyle() {
+    window.bot.expand();
+    window.bot.MainButton.textColor = '#FFFFFF';
+    window.bot.MainButton.color = '#2cab37';
+    window.bot.MainButton.setText("Смотреть заказ");
+}
